@@ -17,11 +17,12 @@ jobs:
       - name: Send Email
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: smtp.office365.com
-          server_port: 587
+          server_address: smtp.gmail.com
+          server_port: 465
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: 'Cambios subidos a rama ${{ github.ref_name }}'
-          body: 'Se realizaron cambios en la rama ${{ github.ref_name }}.'
-          to: 'santiago.ortizs@iteso.mx'
-          from: 'santiago_ortiz_soto363@outlook.com'
+          subject: 'Notificación de Push en GitHub'
+          body: 'Se ha realizado un push en el repositorio.'
+          to: 'santiagosoto363@gmail.com'
+          from: ${{ secrets.EMAIL_USERNAME }}
+
