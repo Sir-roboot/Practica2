@@ -1,0 +1,28 @@
+name: Enviar correo en cada push hecho
+
+on:
+  push:
+    branches:
+      - main
+      - feature_a
+      - feature_b
+
+jobs:
+  send_email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Send Email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: 'Notificación de Push en GitHub. Cambios subidos a rama ${{ github.ref_name }}'
+          body: 'Se ha realizado un push en el repositorio en la rama ${{ github.ref_name }}.'
+          to: 'santiagosoto363@gmail.com'
+          from: ${{ secrets.EMAIL_USERNAME }}
+
